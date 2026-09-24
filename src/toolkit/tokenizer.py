@@ -32,7 +32,7 @@ def read_number(s: str, i: int) -> tuple[tuple[str, int | float], int]:
 
 
 def read_operator(s: str, i: int) -> tuple[tuple[str, str], int]:
-    return (('OPERATOR', s), i)
+    return (('OPERATOR', s), i + 1)
 
 def tokenize(s: str) -> list[tuple[str, int | float | str]]:
     tokens: list[tuple[str, int | float | str]] = []
@@ -47,11 +47,20 @@ def tokenize(s: str) -> list[tuple[str, int | float | str]]:
         elif isoperator(s[i]):
             token, i = read_operator(s[i], i)
             tokens.append(token)
-            i += 1
             continue
 
         elif s[i] == ' ':
             i += 1
+            continue
+
+        elif s[i] == '(':
+            token, i = read_operator(s[i], i)
+            tokens.append(token)
+            continue
+
+        elif s[i] == ')':
+            token, i = read_operator(s[i], i)
+            tokens.append(token)
             continue
 
         else:
