@@ -7,14 +7,20 @@ def factor(tokens: list[tuple[str, int | float | str]], i: int):
         inverted_value = new_value * (-1)
         return (inverted_value, i)
 
+    if tokens[i][1] == '+':
+        new_value, i = factor(tokens, i + 1)
+        return (new_value, i)
+
     elif tokens[i][1] == '(':
         new_value, i = expr(tokens, i + 1)
         if i >= len(tokens):
-            raise ValueError("You haven't closed the parenthesis.")
+            raise ValueError("You haven't closed the brackets.")
         return (new_value, i + 1)
 
     else:
-        return (tokens[i][1], i + 1)
+        if tokens[i][0] == 'NUMBER':
+            return (tokens[i][1], i + 1)
+        raise ValueError("Got two operators in a row.")
 
 def term(tokens, i):
     value, i = factor(tokens, i)
