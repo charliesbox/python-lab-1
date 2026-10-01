@@ -1,5 +1,12 @@
 from .constants import TEMPERATURE_UNITS, UNITS
 
+PRECISION = 4
+
+def format_result(value: float) -> str:
+    rounded = round(value, PRECISION)
+    if rounded == 0 and value != 0:
+        return f"{value:.2e}"
+    return str(rounded)
 
 def find_group(unit: str) -> str:
     if unit in TEMPERATURE_UNITS:
@@ -10,7 +17,7 @@ def find_group(unit: str) -> str:
     raise ValueError(f"Unknown measurement unit: {unit}")
 
 
-def convert(value: str, unit_from: str, unit_to: str) -> float:
+def convert(value: str, unit_from: str, unit_to: str) -> str:
     try:
         number = float(value)
     except ValueError:
@@ -30,7 +37,7 @@ def convert(value: str, unit_from: str, unit_to: str) -> float:
 
         if kelvin < 0:
             raise ValueError("Temperature is below absolute zero.")
-        return from_kelvin(kelvin)
+        return format_result(from_kelvin(kelvin))
 
     units = UNITS[group]
-    return number * units[unit_from] / units[unit_to]
+    return format_result(number * units[unit_from] / units[unit_to])
