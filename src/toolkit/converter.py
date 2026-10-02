@@ -3,12 +3,17 @@ from .constants import TEMPERATURE_UNITS, UNITS
 PRECISION = 4
 
 def format_result(value: float) -> str:
+    """Rounding the answer up to {PRECISION} points"""
+
     rounded = round(value, PRECISION)
     if rounded == 0 and value != 0:
         return f"{value:.2e}"
     return str(rounded)
 
 def find_group(unit: str) -> str:
+    """Finding the group the given unit belongs to...
+    ...and checking whether the units are in the same group"""
+
     if unit in TEMPERATURE_UNITS:
         return 'temperature'
     for group_name, group_units in UNITS.items():
@@ -18,6 +23,8 @@ def find_group(unit: str) -> str:
 
 
 def convert(value: str, unit_from: str, unit_to: str) -> str:
+    """Converting (duh)"""
+
     try:
         number = float(value)
     except ValueError:

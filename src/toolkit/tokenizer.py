@@ -1,8 +1,11 @@
 def isoperator(char: str) -> bool:
+    """Checks if the next character is an opeartor"""
     return char in ['+', '-', '*', '/', '//', '%', '**']
 
 
 def read_number(s: str, i: int) -> tuple[tuple[str, int | float], int]:
+    """Turning a number into a tokenL a tuple that contains the info about the fact
+    it's a number and the number itself"""
     number = ''
     fraction = False
 
@@ -32,9 +35,12 @@ def read_number(s: str, i: int) -> tuple[tuple[str, int | float], int]:
 
 
 def read_operator(s: str, i: int) -> tuple[tuple[str, str], int]:
+    """Turn an operator into a token"""
     return (('OPERATOR', s), i + 1)
 
 def tokenize(s: str) -> list[tuple[str, int | float | str]]:
+    """The entry point of the tokenizer. Turns the given string into a tuple of tokens"""
+
     tokens: list[tuple[str, int | float | str]] = []
     token: tuple[str, int | float | str]
     i = 0
