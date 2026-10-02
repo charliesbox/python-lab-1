@@ -2,8 +2,11 @@ import argparse
 import sys
 from .calculator import evaluate
 from .converter import convert
+from .help import help
 
 def main() -> None:
+    """Parsing arguments and executing user's commands"""
+
     parser = argparse.ArgumentParser(description='CLI Toolkit')
     subparsers = parser.add_subparsers(dest='command')
 
@@ -22,8 +25,8 @@ def main() -> None:
             print('Empty expression given.')
             sys.exit(2)
         try:
-            result = evaluate(args.expression)
-            print(result)
+            calc_result = evaluate(args.expression)
+            print(calc_result)
         except ValueError as e:
             print(f'{e}', file=sys.stderr)
             sys.exit(2)
@@ -31,12 +34,16 @@ def main() -> None:
 
     if args.command == 'convert':
         try:
-            result = convert(args.value, args.unit_from, args.unit_to)
-            print(f'{result} {args.unit_to}')
+            convert_result = convert(args.value, args.unit_from, args.unit_to)
+            print(f'{convert_result} {args.unit_to}')
             sys.exit(0)
         except ValueError as e:
             print(f'{e}', file=sys.stderr)
             sys.exit(2)
+
+    if args.command == 'help' or args.command is None:
+        print(help())
+        sys.exit(0)
 
 if __name__ == '__main__':
     main()
