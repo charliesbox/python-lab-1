@@ -8,3 +8,19 @@ pre_commit==4.6.2
 python-discovery==1.6.1
 PyYAML==6.0.3
 virtualenv==21.11.1
+cfgv==3.5.0
+distlib==0.4.3
+filelock==4.0.1
+identify==2.6.19
+iniconfig==2.1.0
+-e git+https://github.com/charliesbox/python-lab-1@bc0301241f2b38e469908f3bdc4e38ec1a971eaa#egg=labs
+nodeenv==1.10.0
+packaging==25.0
+platformdirs==4.11.12
+pluggy==1.6.0
+pre_commit==4.6.2
+Pygments==2.19.2
+pytest==8.4.2
+python-discovery==1.6.1
+PyYAML==6.0.3
+virtualenv==21.11.1
