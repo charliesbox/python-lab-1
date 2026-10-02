@@ -18,6 +18,7 @@ def main() -> None:
     convert_parser.add_argument('--from', dest='unit_from', type=str, required=True)
     convert_parser.add_argument('--to', type=str, dest='unit_to', required=True)
 
+    subparsers.add_parser('help', help='Print command list')
     args = parser.parse_args()
 
     if args.command == 'calc':
